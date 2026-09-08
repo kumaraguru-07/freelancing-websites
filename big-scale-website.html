@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIG SCALE — Websites, Apps &amp; Design for Local Shops in Tambaram</title>
+<meta name="description" content="BIG SCALE builds websites, apps, posters and promo videos for local shops in Tambaram. Your shop. Our craft. Bigger together.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --charcoal:#111111;
+    --charcoal-soft:#1c1c1a;
+    --charcoal-line: rgba(245,245,240,0.14);
+    --gold:#D4A340;
+    --gold-light:#e8c475;
+    --gold-dark:#a97c2f;
+    --offwhite:#F5F5F0;
+    --ink:#232320;
+    --muted:#83837c;
+    --line-dark: rgba(35,35,32,0.12);
+    --header-h: 76px;
+    --maxw: 1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--offwhite);
+    color:var(--ink);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  ul{margin:0;padding:0;list-style:none;}
+  button{font-family:inherit;cursor:pointer;}
+  section{scroll-margin-top: var(--header-h);}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+
+  h1,h2,h3{margin:0;font-weight:800;letter-spacing:-0.02em;line-height:1.05;}
+  p{margin:0;}
+  .eyebrow-free-label{font-weight:600;color:var(--gold-dark);font-size:0.95rem;}
+
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;scroll-behavior:auto !important;}
+  }
+
+  /* ---------- Preloader ---------- */
+  #preloader{
+    position:fixed;inset:0;background:var(--charcoal);
+    display:flex;align-items:center;justify-content:center;
+    z-index:9999;transition:opacity .6s ease, visibility .6s ease;
+  }
+  #preloader.hide{opacity:0;visibility:hidden;}
+  #preloader svg{width:120px;height:120px;transform:scale(0.6);opacity:0;animation:preloaderIn 1s cubic-bezier(.2,.8,.2,1) forwards;}
+  @keyframes preloaderIn{ to{ transform:scale(1); opacity:1; } }
+  #preloader .bar{transform-origin:bottom;transform:scaleY(0);animation:barGrow .5s ease forwards;}
+  #preloader .bar1{animation-delay:.35s;}
+  #preloader .bar2{animation-delay:.5s;}
+  #preloader .bar3{animation-delay:.65s;}
+  #preloader .bar4{animation-delay:.8s;}
+  @keyframes barGrow{ to{ transform:scaleY(1); } }
+
+  /* ---------- Reveal (single signature entrance, applied consistently) ---------- */
+  .reveal{opacity:0;transform:translateY(18px) scale(0.98);transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);}
+  .reveal.is-visible{opacity:1;transform:translateY(0) scale(1);}
+
+  /* ---------- Header ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    height:var(--header-h);
+    display:flex;align-items:center;
+    background:transparent;
+    transition:background .35s ease, box-shadow .35s ease, backdrop-filter .35s ease;
+  }
+  header.solid{
+    background:rgba(17,17,17,0.92);
+    backdrop-filter:blur(8px);
+    box-shadow:0 1px 0 var(--charcoal-line);
+  }
+  header .wrap{display:flex;align-items:center;justify-content:space-between;width:100%;}
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand svg{width:38px;height:38px;}
+  .brand span{font-weight:800;font-size:1.1rem;letter-spacing:-0.01em;color:var(--offwhite);}
+  .brand span b{color:var(--gold);font-weight:800;}
+
+  nav.primary-nav{display:flex;align-items:center;gap:32px;}
+  nav.primary-nav a{
+    color:var(--offwhite);opacity:.82;font-weight:500;font-size:0.96rem;
+    padding:6px 0;position:relative;transition:opacity .2s ease;
+  }
+  nav.primary-nav a:hover{opacity:1;}
+  nav.primary-nav a::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--gold);
+    transform:scaleX(0);transform-origin:left;transition:transform .3s ease;
+  }
+  nav.primary-nav a:hover::after{transform:scaleX(1);}
+
+  .header-actions{display:flex;align-items:center;gap:16px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 22px;border-radius:3px;font-weight:600;font-size:0.95rem;
+    border:1px solid transparent;position:relative;overflow:hidden;
+  }
+  .btn-gold{background:var(--gold);color:var(--charcoal);}
+  .btn-gold::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(120deg, transparent 30%, rgba(255,255,255,.55) 50%, transparent 70%);
+    transform:translateX(-120%);transition:transform .6s ease;
+  }
+  .btn-gold:hover::before{transform:translateX(120%);}
+  .btn-outline{border-color:rgba(245,245,240,.4);color:var(--offwhite);}
+  .btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+  .btn-outline.dark{border-color:rgba(35,35,32,.3);color:var(--ink);}
+  .btn-outline.dark:hover{border-color:var(--gold-dark);color:var(--gold-dark);}
+
+  .hamburger{display:none;width:40px;height:40px;border:none;background:none;position:relative;z-index:1200;}
+  .hamburger span{display:block;width:22px;height:2px;background:var(--offwhite);margin:5px auto;transition:transform .3s ease, opacity .3s ease;}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .mobile-menu{
+    position:fixed;inset:0;background:var(--charcoal);z-index:1100;
+    display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:26px;
+    padding:0 40px;
+    transform:translateY(-100%);transition:transform .45s cubic-bezier(.2,.8,.2,1);
+  }
+  .mobile-menu.open{transform:translateY(0);}
+  .mobile-menu a{color:var(--offwhite);font-size:1.7rem;font-weight:700;}
+  .mobile-menu a:hover{color:var(--gold);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;min-height:100vh;
+    background:var(--charcoal);color:var(--offwhite);
+    display:flex;align-items:center;
+    padding-top:var(--header-h);
+    overflow:hidden;
+  }
+  .hero-glow{
+    position:absolute;top:-10%;right:-10%;width:60%;height:70%;
+    background:radial-gradient(circle, rgba(212,163,64,0.18), transparent 70%);
+    pointer-events:none;
+  }
+  .hero-motif{
+    position:absolute;right:-6%;top:50%;transform:translateY(-50%);
+    width:min(46vw, 560px);opacity:0.9;will-change:transform;
+  }
+  .hero-inner{position:relative;z-index:2;padding:80px 0 100px;}
+  .hero h1{
+    font-size:clamp(2.4rem, 6vw, 4.6rem);
+    max-width:14ch;
+    color:var(--offwhite);
+  }
+  .hero h1 em{font-style:normal;color:var(--gold);}
+  .hero .sub{
+    margin-top:26px;max-width:46ch;font-size:1.15rem;line-height:1.65;color:rgba(245,245,240,.78);
+  }
+  .hero .cta-row{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap;}
+  .hero .cta-row .btn{padding:14px 28px;font-size:1rem;}
+
+  /* magnetic button wrapper */
+  .magnetic{display:inline-block;transition:transform .15s ease;}
+
+  /* ---------- Trust strip ---------- */
+  .trust{background:var(--offwhite);padding:56px 0;border-bottom:1px solid var(--line-dark);}
+  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;}
+  .trust-item{display:flex;flex-direction:column;gap:6px;}
+  .trust-item svg{width:26px;height:26px;color:var(--gold-dark);margin-bottom:6px;}
+  .trust-item .stat{font-size:1.6rem;font-weight:800;letter-spacing:-0.01em;}
+  .trust-item .label{font-size:0.95rem;color:var(--muted);line-height:1.4;}
+
+  /* ---------- Section heading pattern ---------- */
+  .section-head{max-width:56ch;margin-bottom:52px;}
+  .section-head h2{font-size:clamp(1.8rem,3.4vw,2.6rem);}
+  .section-head p{margin-top:14px;font-size:1.06rem;color:var(--muted);line-height:1.6;}
+  .on-dark .section-head p{color:rgba(245,245,240,.7);}
+  .on-dark .section-head h2{color:var(--offwhite);}
+
+  /* ---------- Services (menu-board style) ---------- */
+  .services{padding:110px 0;background:var(--offwhite);}
+  .service-row{
+    display:flex;align-items:center;gap:24px;
+    padding:26px 0;border-top:1px solid var(--line-dark);
+  }
+  .services ul li:last-child .service-row{border-bottom:1px solid var(--line-dark);}
+  .service-icon{
+    width:52px;height:52px;flex:none;border-radius:2px;
+    background:var(--charcoal);display:flex;align-items:center;justify-content:center;
+  }
+  .service-icon svg{width:26px;height:26px;color:var(--gold);}
+  .service-text{flex:1;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:18px;}
+  .service-text h3{font-size:1.18rem;font-weight:700;}
+  .service-text p{color:var(--muted);font-size:0.98rem;max-width:52ch;}
+  .service-row .btn{flex:none;white-space:nowrap;}
+
+  /* ---------- Portfolio ---------- */
+  .portfolio{padding:110px 0;background:var(--charcoal);color:var(--offwhite);}
+  .portfolio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
+  .concept-card{
+    position:relative;border:1px solid var(--charcoal-line);border-radius:2px;
+    overflow:hidden;background:var(--charcoal-soft);
+  }
+  .concept-tag{
+    position:absolute;top:14px;left:14px;z-index:3;
+    font-size:0.76rem;font-weight:600;color:var(--charcoal);
+    background:var(--gold);padding:4px 10px;border-radius:2px;letter-spacing:0.02em;
+  }
+  .concept-visual{aspect-ratio:16/10;position:relative;transition:transform .5s cubic-bezier(.2,.7,.2,1);}
+  .concept-card:hover .concept-visual{transform:scale(1.035);}
+  .concept-overlay{
+    position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+    padding:20px;background:linear-gradient(to top, rgba(17,17,17,.92), transparent 65%);
+    transform:translateY(10px);opacity:0;transition:opacity .35s ease, transform .35s ease;
+  }
+  .concept-card:hover .concept-overlay{opacity:1;transform:translateY(0);}
+  .concept-overlay h3{font-size:1.08rem;font-weight:700;}
+  .concept-overlay p{font-size:0.9rem;color:rgba(245,245,240,.72);margin-top:4px;}
+
+  /* mockups built from CSS */
+  .mockup-browser{position:absolute;inset:0;background:#F5F5F0;}
+  .mockup-browser .chrome{height:26px;background:#e3e3dd;display:flex;align-items:center;gap:6px;padding:0 10px;}
+  .mockup-browser .chrome i{width:7px;height:7px;border-radius:50%;background:#c9c9c1;}
+  .mockup-browser .body{padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .mockup-browser .block{background:linear-gradient(135deg,var(--gold-light),var(--gold));border-radius:2px;height:34px;}
+  .mockup-browser .block.tall{height:74px;grid-column:span 2;background:var(--charcoal);}
+  .mockup-browser .line{height:8px;background:#dedcd2;border-radius:2px;margin-top:8px;width:70%;}
+
+  .mockup-phone{position:absolute;inset:0;background:#0e0e0d;display:flex;align-items:center;justify-content:center;}
+  .mockup-phone .frame{width:52%;height:88%;border:3px solid #3a3a37;border-radius:20px;background:var(--offwhite);position:relative;overflow:hidden;}
+  .mockup-phone .frame .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:38%;height:14px;background:#3a3a37;border-radius:0 0 8px 8px;}
+  .mockup-phone .frame .ui-block{position:absolute;left:10%;right:10%;height:16px;background:#e3e3dd;border-radius:3px;}
+  .mockup-phone .frame .ui-block.b1{top:24%;}
+  .mockup-phone .frame .ui-block.b2{top:34%;width:70%;background:var(--gold);}
+  .mockup-phone .frame .ui-block.b3{top:52%;height:30%;background:#efeee7;}
+
+  .mockup-poster{position:absolute;inset:0;background:var(--charcoal);display:flex;align-items:center;justify-content:center;padding:22px;}
+  .mockup-poster .sheet{width:60%;height:100%;background:linear-gradient(160deg,#1c1c1a,var(--charcoal));border:1px solid var(--gold-dark);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+  .mockup-poster .sheet .headline{font-weight:800;color:var(--gold);font-size:1.4rem;letter-spacing:-0.01em;}
+  .mockup-poster .sheet .sub{font-size:0.72rem;color:rgba(245,245,240,.6);}
+  .mockup-poster .sheet .rule{width:30%;height:2px;background:var(--gold-dark);margin:4px 0;}
+
+  .mockup-video{position:absolute;inset:0;background:linear-gradient(135deg,#26261f,var(--charcoal));display:flex;align-items:center;justify-content:center;}
+  .mockup-video .play{
+    width:56px;height:56px;border-radius:50%;background:rgba(245,245,240,.12);
+    border:1px solid rgba(245,245,240,.4);display:flex;align-items:center;justify-content:center;
+  }
+  .mockup-video .play svg{width:20px;height:20px;color:var(--offwhite);margin-left:3px;}
+  .mockup-video .bar{position:absolute;bottom:16px;left:16px;right:16px;height:3px;background:rgba(245,245,240,.25);border-radius:2px;overflow:hidden;}
+  .mockup-video .bar i{display:block;width:38%;height:100%;background:var(--gold);}
+
+  /* ---------- Testimonials marquee ---------- */
+  .testimonials{padding:110px 0 120px;background:var(--offwhite);overflow:hidden;}
+  .marquee-track{display:flex;gap:28px;width:max-content;animation:scrollX 34s linear infinite;}
+  .marquee-wrap:hover .marquee-track{animation-play-state:paused;}
+  @keyframes scrollX{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  .quote-plaque{
+    width:360px;flex:none;border-top:2px solid var(--gold);padding:26px 4px;
+  }
+  .quote-plaque p.quote{font-size:1.05rem;line-height:1.6;color:var(--ink);}
+  .quote-plaque .who{margin-top:16px;font-size:0.92rem;color:var(--muted);font-weight:600;}
+
+  /* ---------- About ---------- */
+  .about{padding:110px 0;background:var(--charcoal);color:var(--offwhite);}
+  .about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:start;}
+  .about-copy p{color:rgba(245,245,240,.78);line-height:1.75;font-size:1.05rem;max-width:52ch;}
+  .about-copy p + p{margin-top:16px;}
+  .founders{display:flex;flex-direction:column;gap:20px;}
+  .founder-card{
+    display:flex;gap:16px;align-items:flex-start;border:1px solid var(--charcoal-line);
+    padding:22px;border-radius:2px;
+  }
+  .founder-mark{
+    flex:none;width:52px;height:52px;border:1.5px solid var(--gold);border-radius:2px;
+    display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--gold);
+  }
+  .founder-card h3{font-size:1.05rem;font-weight:700;}
+  .founder-card .role{color:var(--gold);font-size:0.88rem;font-weight:600;margin-top:2px;}
+  .founder-card p{margin-top:8px;font-size:0.92rem;color:rgba(245,245,240,.68);line-height:1.55;}
+
+  /* ---------- FAQ ---------- */
+  .faq{padding:110px 0;background:var(--offwhite);}
+  .faq-list{max-width:760px;}
+  details{border-bottom:1px solid var(--line-dark);padding:22px 0;}
+  details summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+    font-weight:700;font-size:1.05rem;gap:20px;
+  }
+  details summary::-webkit-details-marker{display:none;}
+  details summary .plus{flex:none;width:22px;height:22px;position:relative;}
+  details summary .plus::before, details summary .plus::after{
+    content:"";position:absolute;background:var(--ink);transition:transform .3s ease;
+  }
+  details summary .plus::before{left:0;top:50%;width:100%;height:1.5px;transform:translateY(-50%);}
+  details summary .plus::after{top:0;left:50%;width:1.5px;height:100%;transform:translateX(-50%);}
+  details[open] summary .plus::after{transform:translateX(-50%) rotate(90deg);opacity:0;}
+  details .faq-a{padding-top:14px;color:var(--muted);line-height:1.65;max-width:66ch;}
+
+  /* ---------- Contact ---------- */
+  .contact{padding:110px 0 120px;background:var(--charcoal);color:var(--offwhite);}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;}
+  .contact-info p{color:rgba(245,245,240,.75);line-height:1.7;max-width:44ch;font-size:1.05rem;}
+  .contact-info .direct{margin-top:28px;display:flex;flex-direction:column;gap:14px;}
+  .contact-info .direct a{font-weight:600;color:var(--gold);}
+
+  .field{margin-bottom:26px;}
+  .field label{display:block;font-size:0.88rem;color:rgba(245,245,240,.6);margin-bottom:8px;}
+  .field input, .field select, .field textarea{
+    width:100%;background:transparent;border:none;border-bottom:1px solid rgba(245,245,240,.3);
+    color:var(--offwhite);font-family:inherit;font-size:1rem;padding:10px 2px;
+    transition:border-color .25s ease;
+  }
+  .field select option{color:var(--ink);}
+  .field input:focus, .field select:focus, .field textarea:focus{border-color:var(--gold);}
+  .field textarea{resize:vertical;min-height:88px;}
+  #formNote{margin-top:16px;font-size:0.92rem;color:var(--gold-light);min-height:1.2em;}
+
+  /* ---------- WhatsApp floating button ---------- */
+  .wa-float{
+    position:fixed;right:22px;bottom:22px;z-index:900;
+    width:58px;height:58px;border-radius:50%;background:#1EA952;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 18px rgba(0,0,0,.28);
+  }
+  .wa-float svg{width:28px;height:28px;color:#fff;}
+  .wa-float::before{
+    content:"";position:absolute;inset:0;border-radius:50%;background:#1EA952;
+    animation:pulseRing 2.4s ease-out infinite;
+  }
+  @keyframes pulseRing{ 0%{transform:scale(1);opacity:.55;} 100%{transform:scale(1.9);opacity:0;} }
+
+  /* ---------- Footer ---------- */
+  footer{background:#0a0a0a;color:rgba(245,245,240,.6);padding:56px 0 30px;}
+  .footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;padding-bottom:36px;border-bottom:1px solid var(--charcoal-line);}
+  .footer-brand{display:flex;align-items:center;gap:10px;}
+  .footer-brand svg{width:30px;height:30px;}
+  .footer-brand span{color:var(--offwhite);font-weight:800;}
+  .footer-links{display:flex;gap:40px;flex-wrap:wrap;}
+  .footer-links h4{color:var(--offwhite);font-size:0.9rem;margin-bottom:12px;}
+  .footer-links ul{display:flex;flex-direction:column;gap:8px;}
+  .footer-links a:hover{color:var(--gold);}
+  .footer-bottom{padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:0.85rem;}
+
+  /* section-transition wipe */
+  #wipe{
+    position:fixed;inset:0;background:var(--gold);z-index:1300;
+    transform:scaleX(0);transform-origin:left;pointer-events:none;
+  }
+  #wipe.run{animation:wipeRun .7s cubic-bezier(.6,0,.3,1);}
+  @keyframes wipeRun{
+    0%{transform:scaleX(0);transform-origin:left;}
+    45%{transform:scaleX(1);transform-origin:left;}
+    55%{transform:scaleX(1);transform-origin:right;}
+    100%{transform:scaleX(0);transform-origin:right;}
+  }
+
+  @media (max-width: 900px){
+    nav.primary-nav{display:none;}
+    .hamburger{display:block;}
+    .hero-motif{opacity:.35;width:70vw;}
+    .trust-grid{grid-template-columns:repeat(2,1fr);}
+    .portfolio-grid{grid-template-columns:1fr;}
+    .about-grid, .contact-grid{grid-template-columns:1fr;gap:40px;}
+    .service-row{flex-wrap:wrap;}
+    .service-row .btn{margin-left:66px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ Preloader ============ -->
+<div id="preloader" aria-hidden="true">
+  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <rect class="bar bar1" x="33" y="105" width="20" height="40" rx="3" fill="#D4A340"/>
+    <rect class="bar bar2" x="65" y="80"  width="20" height="65" rx="3" fill="#e0b658"/>
+    <rect class="bar bar3" x="97" y="55" width="20" height="90" rx="3" fill="#e8c475"/>
+    <rect class="bar bar4" x="129" y="30" width="20" height="115" rx="3" fill="#f0d38f"/>
+  </svg>
+</div>
+
+<div id="wipe"></div>
+
+<!-- ============ Header ============ -->
+<header id="siteHeader">
+  <div class="wrap">
+    <a href="#home" class="brand">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="200" rx="40" fill="#1B1B1B"/>
+        <rect x="48" y="120" width="20" height="40" rx="3" fill="#D4A340" opacity="0.75"/>
+        <rect x="80" y="95" width="20" height="65" rx="3" fill="#D4A340" opacity="0.85"/>
+        <rect x="112" y="70" width="20" height="90" rx="3" fill="#D4A340" opacity="0.95"/>
+        <rect x="144" y="45" width="20" height="115" rx="3" fill="#D4A340"/>
+        <polyline points="48,118 80,93 112,68 144,43 168,22" fill="none" stroke="#F5F5F0" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <polygon points="168,22 148,27 162,41" fill="#F5F5F0"/>
+      </svg>
+      <span>BIG <b>SCALE</b></span>
+    </a>
+
+    <nav class="primary-nav">
+      <a href="#services">Services</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Get a Quote</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-outline magnetic" href="#contact">Get a quote</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services">Services</a>
+  <a href="#portfolio">Portfolio</a>
+  <a href="#testimonials">Reviews</a>
+  <a href="#about">About</a>
+  <a href="#faq">FAQ</a>
+  <a href="#contact">Get a Quote</a>
+</div>
+
+<main>
+  <!-- ============ Hero ============ -->
+  <section class="hero" id="home">
+    <div class="hero-glow"></div>
+    <svg class="hero-motif" id="heroMotif" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <rect x="70" y="230" width="46" height="110" rx="6" fill="#D4A340" opacity="0.15"/>
+      <rect x="140" y="180" width="46" height="160" rx="6" fill="#D4A340" opacity="0.22"/>
+      <rect x="210" y="120" width="46" height="220" rx="6" fill="#D4A340" opacity="0.3"/>
+      <rect x="280" y="60"  width="46" height="280" rx="6" fill="#D4A340" opacity="0.4"/>
+      <polyline points="70,225 140,175 210,115 280,55 340,20" fill="none" stroke="#F5F5F0" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+    </svg>
+    <div class="wrap hero-inner">
+      <h1 class="reveal">Your shop. Our craft. <em>Bigger together.</em></h1>
+      <p class="sub reveal">BIG SCALE is a two-person digital studio in Tambaram building websites, apps, posters and promo videos for local shops that are ready to grow online.</p>
+      <div class="cta-row">
+        <span class="magnetic"><a class="btn btn-gold" id="heroWaBtn" href="#" target="_blank" rel="noopener">Chat with us on WhatsApp</a></span>
+        <a class="btn btn-outline" href="#portfolio">See our work</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Trust strip ============ -->
+  <section class="trust">
+    <div class="wrap trust-grid">
+      <div class="trust-item reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.3-9C1 8.5 2.8 5 6.3 5c2 0 3.3 1.1 3.9 2C10.7 6.1 12 5 14 5c3.5 0 5.3 3.5 3.6 7-2.3 4.5-9.3 9-9.3 9z"/></svg>
+        <div class="stat" id="tambaramStat">0%</div>
+        <div class="label">Tambaram &amp; local-shop focused — we know the shops you're competing with</div>
+      </div>
+      <div class="trust-item reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <div class="stat">Fast</div>
+        <div class="label">Quick turnaround — no waiting weeks to get online</div>
+      </div>
+      <div class="trust-item reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+        <div class="stat">Clear</div>
+        <div class="label">Transparent pricing — you know the cost before we start</div>
+      </div>
+      <div class="trust-item reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        <div class="stat">Ongoing</div>
+        <div class="label">Support after launch — we stay reachable on WhatsApp</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Services ============ -->
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Everything your shop needs to look good online</h2>
+        <p>Pick one service or bundle a few — every quote is built around what your shop actually needs.</p>
+      </div>
+
+      <ul>
+        <li class="reveal">
+          <div class="service-row">
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg></div>
+            <div class="service-text"><h3>Website design &amp; development</h3><p>A fast, mobile-friendly site that tells customers who you are and how to reach you.</p></div>
+            <a class="btn btn-outline dark" href="#" data-service="Website design &amp; development">Ask on WhatsApp</a>
+          </div>
+        </li>
+        <li class="reveal">
+          <div class="service-row">
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg></div>
+            <div class="service-text"><h3>App development</h3><p>A simple app for orders, bookings, or loyalty — built for what your shop actually does.</p></div>
+            <a class="btn btn-outline dark" href="#" data-service="App development">Ask on WhatsApp</a>
+          </div>
+        </li>
+        <li class="reveal">
+          <div class="service-row">
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5-9 9"/></svg></div>
+            <div class="service-text"><h3>Poster &amp; flyer design</h3><p>Offer posters, festival sale banners, and print-ready flyers that actually get noticed.</p></div>
+            <a class="btn btn-outline dark" href="#" data-service="Poster &amp; flyer design">Ask on WhatsApp</a>
+          </div>
+        </li>
+        <li class="reveal">
+          <div class="service-row">
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="14" height="14" rx="2"/><path d="M17 9l4-2v10l-4-2"/></svg></div>
+            <div class="service-text"><h3>Promotional videos</h3><p>Short videos showing off your shop or product, edited for Instagram and WhatsApp status.</p></div>
+            <a class="btn btn-outline dark" href="#" data-service="Promotional videos">Ask on WhatsApp</a>
+          </div>
+        </li>
+        <li class="reveal">
+          <div class="service-row">
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
+            <div class="service-text"><h3>Logo design</h3><p>A simple, memorable mark for your shop that works on signboards, bills, and packaging.</p></div>
+            <a class="btn btn-outline dark" href="#" data-service="Logo design">Ask on WhatsApp</a>
+          </div>
+        </li>
+        <li class="reveal">
+          <div class="service-row">
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.3-9C1 8.5 2.8 5 6.3 5c2 0 3.3 1.1 3.9 2C10.7 6.1 12 5 14 5c3.5 0 5.3 3.5 3.6 7-2.3 4.5-9.3 9-9.3 9z"/><path d="M9 12l2 2 4-4" stroke="#111"/></svg></div>
+            <div class="service-text"><h3>Google Business Profile setup</h3><p>So your shop shows up on Google Maps and search when someone nearby looks for you.</p></div>
+            <a class="btn btn-outline dark" href="#" data-service="Google Business Profile setup">Ask on WhatsApp</a>
+          </div>
+        </li>
+        <li class="reveal">
+          <div class="service-row">
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 20l1-5.5a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.3z"/></svg></div>
+            <div class="service-text"><h3>Social media page setup</h3><p>Instagram/Facebook page set up properly, with a few starter posts to launch with.</p></div>
+            <a class="btn btn-outline dark" href="#" data-service="Social media page setup">Ask on WhatsApp</a>
+          </div>
+        </li>
+        <li class="reveal">
+          <div class="service-row">
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><circle cx="8.5" cy="10.5" r=".8" fill="currentColor" stroke="none"/><circle cx="12" cy="10.5" r=".8" fill="currentColor" stroke="none"/><circle cx="15.5" cy="10.5" r=".8" fill="currentColor" stroke="none"/></svg></div>
+            <div class="service-text"><h3>WhatsApp catalog &amp; auto-reply chatbot setup</h3><p>Your products in a WhatsApp catalog, with an auto-reply so customers get instant answers.</p></div>
+            <a class="btn btn-outline dark" href="#" data-service="WhatsApp catalog &amp; auto-reply chatbot setup">Ask on WhatsApp</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ Portfolio ============ -->
+  <section class="portfolio on-dark" id="portfolio">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Concept work — a preview of what we build</h2>
+        <p>We're a new studio, so these are concept pieces built to show our style. Once we finish real client projects, this section fills up with actual shop work.</p>
+      </div>
+      <div class="portfolio-grid">
+        <div class="concept-card reveal">
+          <span class="concept-tag">Concept — Website</span>
+          <div class="concept-visual">
+            <div class="mockup-browser"><div class="chrome"><i></i><i></i><i></i></div>
+              <div class="body">
+                <div class="block tall"></div>
+                <div class="block"></div><div class="block"></div>
+              </div>
+            </div>
+          </div>
+          <div class="concept-overlay"><h3>Local shop homepage concept</h3><p>Clean layout built to load fast and show products above the fold.</p></div>
+        </div>
+
+        <div class="concept-card reveal">
+          <span class="concept-tag">Concept — App</span>
+          <div class="concept-visual">
+            <div class="mockup-phone"><div class="frame"><div class="notch"></div>
+              <div class="ui-block b1"></div><div class="ui-block b2"></div><div class="ui-block b3"></div>
+            </div></div>
+          </div>
+          <div class="concept-overlay"><h3>Order &amp; booking app concept</h3><p>Simple screens for browsing products and placing an order.</p></div>
+        </div>
+
+        <div class="concept-card reveal">
+          <span class="concept-tag">Concept — Poster</span>
+          <div class="concept-visual">
+            <div class="mockup-poster"><div class="sheet">
+              <div class="rule"></div><div class="headline">SALE</div><div class="sub">FESTIVAL OFFER · THIS WEEK</div><div class="rule"></div>
+            </div></div>
+          </div>
+          <div class="concept-overlay"><h3>Festival sale poster concept</h3><p>Bold type and a clear offer — built for print and WhatsApp status.</p></div>
+        </div>
+
+        <div class="concept-card reveal">
+          <span class="concept-tag">Concept — Video</span>
+          <div class="concept-visual">
+            <div class="mockup-video"><div class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+              <div class="bar"><i></i></div>
+            </div>
+          </div>
+          <div class="concept-overlay"><h3>Shop promo video concept</h3><p>Short-form edit style for Instagram Reels and WhatsApp status.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Testimonials ============ -->
+  <section class="testimonials" id="testimonials">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>What shop owners will say</h2>
+        <p>We're taking on our first projects now — this space is ready for real reviews as soon as they come in.</p>
+      </div>
+    </div>
+    <div class="marquee-wrap">
+      <div class="marquee-track">
+        <div class="quote-plaque"><p class="quote">"Add your first client's feedback here once a project is delivered."</p><div class="who">— Your first client, Shop name</div></div>
+        <div class="quote-plaque"><p class="quote">"A short quote about turnaround time or communication works well here."</p><div class="who">— Client name, Shop name</div></div>
+        <div class="quote-plaque"><p class="quote">"Reviews that mention a specific result build the most trust."</p><div class="who">— Client name, Shop name</div></div>
+        <div class="quote-plaque"><p class="quote">"Add your first client's feedback here once a project is delivered."</p><div class="who">— Your first client, Shop name</div></div>
+        <div class="quote-plaque"><p class="quote">"A short quote about turnaround time or communication works well here."</p><div class="who">— Client name, Shop name</div></div>
+        <div class="quote-plaque"><p class="quote">"Reviews that mention a specific result build the most trust."</p><div class="who">— Client name, Shop name</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ About ============ -->
+  <section class="about" id="about">
+    <div class="wrap about-grid">
+      <div class="about-copy reveal">
+        <div class="section-head" style="margin-bottom:24px;">
+          <h2>One Team, one studio, based in Tambaram</h2>
+        </div>
+        <p>BIG SCALE started because we kept noticing the same thing: great local shops with no real presence online. We're two friends who build websites and apps, and we started this studio to do that work properly for shops around us.</p>
+        <p>We handle the whole thing ourselves — design, build, and support after launch — so you're always talking directly to the people doing the work, not a call centre.</p>
+      </div>
+      <div class="founders">
+        <div class="founder-card reveal">
+          <div class="founder-mark">01</div>
+          <div><h3>Your Name</h3><div class="role">Co-founder — Development</div><p>Handles the code side: websites, apps, and making sure everything runs fast.</p></div>
+        </div>
+        <div class="founder-card reveal">
+          <div class="founder-mark">02</div>
+          <div><h3>Your Friend's Name</h3><div class="role">Co-founder — Design</div><p>Handles posters, videos, and the visual side of every project.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="faq" id="faq">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Common questions</h2>
+      </div>
+      <div class="faq-list reveal">
+        <details>
+          <summary>How long does a website or app take? <span class="plus"></span></summary>
+          <p class="faq-a">Most simple shop websites take about a week from getting your details to going live. Apps and bigger projects take longer — we'll give you a clear timeline before starting.</p>
+        </details>
+        <details>
+          <summary>What do you need from me to get started? <span class="plus"></span></summary>
+          <p class="faq-a">Your shop name, logo (if you have one), a few photos, your products or services, and contact details. If you don't have a logo yet, we can design one for you.</p>
+        </details>
+        <details>
+          <summary>Do you handle hosting and the domain? <span class="plus"></span></summary>
+          <p class="faq-a">Yes — we can set up hosting and your domain name for you, or work with one you already own.</p>
+        </details>
+        <details>
+          <summary>Can I ask for changes after it's built? <span class="plus"></span></summary>
+          <p class="faq-a">Yes. We include a round of revisions in every project, and we're reachable on WhatsApp after launch for anything that comes up.</p>
+        </details>
+        <details>
+          <summary>How much does it cost? <span class="plus"></span></summary>
+          <p class="faq-a">It depends on what your shop needs — a single poster costs very different from a full website with an app. Message us on WhatsApp with what you're looking for and we'll give you a clear price.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Contact ============ -->
+  <section class="contact" id="contact">
+    <div class="wrap contact-grid">
+      <div class="contact-info reveal">
+        <div class="section-head" style="margin-bottom:24px;">
+          <h2 style="color:var(--offwhite);">Tell us about your shop</h2>
+        </div>
+        <p>Fill in a few details and we'll open a WhatsApp chat pre-filled with what you've told us — or reach us directly below.</p>
+        <div class="direct">
+          <a id="directWaLink" href="#" target="_blank" rel="noopener">WhatsApp: +91 00000 00000</a>
+          <a href="mailto:hello@bigscale.studio">hello@bigscale.studio</a>
+        </div>
+      </div>
+
+      <form id="quoteForm" class="reveal">
+        <div class="field">
+          <label for="fName">Your name</label>
+          <input id="fName" type="text" required>
+        </div>
+        <div class="field">
+          <label for="fShop">Shop name</label>
+          <input id="fShop" type="text" required>
+        </div>
+        <div class="field">
+          <label for="fService">Service needed</label>
+          <select id="fService">
+            <option>Website design &amp; development</option>
+            <option>App development</option>
+            <option>Poster &amp; flyer design</option>
+            <option>Promotional videos</option>
+            <option>Logo design</option>
+            <option>Google Business Profile setup</option>
+            <option>Social media page setup</option>
+            <option>WhatsApp catalog &amp; auto-reply chatbot setup</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="fMsg">A little about what you need</label>
+          <textarea id="fMsg" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-gold magnetic">Send enquiry on WhatsApp</button>
+        <div id="formNote"></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<a class="wa-float" id="floatWaBtn" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.71.45 3.38 1.3 4.85L2 22l5.36-1.4a9.9 9.9 0 004.68 1.19h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2zm5.83 14.07c-.24.68-1.4 1.3-1.94 1.38-.5.08-1.12.11-1.81-.11-.42-.13-.95-.31-1.64-.6-2.88-1.24-4.76-4.14-4.9-4.33-.14-.19-1.17-1.56-1.17-2.97 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.12.57.17.29.75 1.24 1.61 2 1.11.99 2.04 1.3 2.33 1.44.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.66.78 1.94.93.29.14.48.21.55.33.07.12.07.68-.17 1.36z"/></svg>
+</a>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" rx="40" fill="#1B1B1B"/>
+          <rect x="48" y="120" width="20" height="40" rx="3" fill="#D4A340" opacity="0.75"/>
+          <rect x="80" y="95" width="20" height="65" rx="3" fill="#D4A340" opacity="0.85"/>
+          <rect x="112" y="70" width="20" height="90" rx="3" fill="#D4A340" opacity="0.95"/>
+          <rect x="144" y="45" width="20" height="115" rx="3" fill="#D4A340"/>
+        </svg>
+        <span>BIG SCALE</span>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>Studio</h4>
+          <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#about">About</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:hello@bigscale.studio">hello@bigscale.studio</a></li>
+            <li><a href="#contact">Get a quote</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year"></span> BIG SCALE. Based in Tambaram.</span>
+      <span>Your shop. Our craft. Bigger together.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ---- CONFIG: update this before going live ----
+  var WHATSAPP_NUMBER = "910000000000"; // <-- replace with real number, country code + number, no + or spaces
+
+  function waLink(message){
+    return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
+  }
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  var defaultMsg = "Hi BIG SCALE, I'd like to know more about your services.";
+  document.getElementById("heroWaBtn").href = waLink(defaultMsg);
+  document.getElementById("floatWaBtn").href = waLink(defaultMsg);
+  document.getElementById("directWaLink").href = waLink(defaultMsg);
+
+  document.querySelectorAll("[data-service]").forEach(function(el){
+    el.addEventListener("click", function(e){
+      e.preventDefault();
+      var service = el.getAttribute("data-service");
+      window.open(waLink("Hi BIG SCALE, I'm interested in " + service + " for my shop."), "_blank", "noopener");
+    });
+  });
+
+  // ---- Preloader ----
+  window.addEventListener("load", function(){
+    setTimeout(function(){
+      document.getElementById("preloader").classList.add("hide");
+    }, 650);
+  });
+
+  // ---- Header solid-on-scroll ----
+  var header = document.getElementById("siteHeader");
+  function onScroll(){
+    if(window.scrollY > 40){ header.classList.add("solid"); }
+    else{ header.classList.remove("solid"); }
+  }
+  document.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+
+  // ---- Hero parallax ----
+  var motif = document.getElementById("heroMotif");
+  document.addEventListener("scroll", function(){
+    var y = window.scrollY;
+    if(y < window.innerHeight){
+      motif.style.transform = "translateY(" + (-50 + y * 0.06) + "%) translateX(" + (y * -0.08) + "px)";
+    }
+  }, {passive:true});
+
+  // ---- Mobile menu ----
+  var hamburger = document.getElementById("hamburgerBtn");
+  var mobileMenu = document.getElementById("mobileMenu");
+  hamburger.addEventListener("click", function(){
+    var open = mobileMenu.classList.toggle("open");
+    hamburger.classList.toggle("open", open);
+    hamburger.setAttribute("aria-expanded", open);
+  });
+  mobileMenu.querySelectorAll("a").forEach(function(a){
+    a.addEventListener("click", function(){
+      mobileMenu.classList.remove("open");
+      hamburger.classList.remove("open");
+      hamburger.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  // ---- Nav "wipe" transition on internal links ----
+  var wipe = document.getElementById("wipe");
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener("click", function(e){
+      var id = a.getAttribute("href");
+      if(id.length < 2) return;
+      var target = document.querySelector(id);
+      if(!target) return;
+      e.preventDefault();
+      wipe.classList.remove("run"); void wipe.offsetWidth; wipe.classList.add("run");
+      setTimeout(function(){
+        target.scrollIntoView({behavior:"smooth", block:"start"});
+      }, 260);
+    });
+  });
+
+  // ---- Scroll reveal (single signature entrance) ----
+  var revealEls = document.querySelectorAll(".reveal");
+  if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add("is-visible");
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.15});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add("is-visible"); });
+  }
+
+  // ---- Trust stat count-up (honest: 100% Tambaram-focused) ----
+  var statEl = document.getElementById("tambaramStat");
+  var counted = false;
+  var io2 = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting && !counted){
+        counted = true;
+        var start = null;
+        function step(ts){
+          if(!start) start = ts;
+          var progress = Math.min((ts - start) / 900, 1);
+          statEl.textContent = Math.round(progress * 100) + "%";
+          if(progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+        io2.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.5});
+  io2.observe(statEl);
+
+  // ---- Magnetic buttons ----
+  document.querySelectorAll(".magnetic").forEach(function(wrapEl){
+    var inner = wrapEl.querySelector("a") || wrapEl;
+    wrapEl.addEventListener("mousemove", function(e){
+      var r = wrapEl.getBoundingClientRect();
+      var x = e.clientX - r.left - r.width/2;
+      var y = e.clientY - r.top - r.height/2;
+      inner.style.transform = "translate(" + (x*0.18) + "px," + (y*0.35) + "px)";
+    });
+    wrapEl.addEventListener("mouseleave", function(){
+      inner.style.transform = "translate(0,0)";
+    });
+  });
+
+  // ---- Quote form -> WhatsApp ----
+  document.getElementById("quoteForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = document.getElementById("fName").value.trim();
+    var shop = document.getElementById("fShop").value.trim();
+    var service = document.getElementById("fService").value;
+    var msg = document.getElementById("fMsg").value.trim();
+    var note = document.getElementById("formNote");
+
+    if(!name || !shop){
+      note.textContent = "Please add your name and shop name.";
+      return;
+    }
+    var text = "Hi BIG SCALE, I'm " + name + " from " + shop + ". I'm interested in: " + service + (msg ? (". " + msg) : ".");
+    window.open(waLink(text), "_blank", "noopener");
+    note.textContent = "Opening WhatsApp with your details filled in \u2014 just hit send.";
+  });
+})();
+</script>
+
+</body>
+</html>
